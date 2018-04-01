@@ -35,12 +35,14 @@ if (arg === 'my-tweets') {
 	tweets();
 };
 
-// if (arg === 'spotify-this-song') {
-// 	spotify.search({type:'track', query:'Californication', limit: 1}, function(err, data){
-// 		if (err) {
-// 			return console.log('Error occurred: ' + err);
-// 		}
-// 		console.log(JSON.stringify(data, null, 2));
-// 	});
-// } 
+// Spotify
+var q = '';
+
+
+function songs = {
+	spotify.search({
+		type: 'track',
+		query: q,
+	})
+}
 
