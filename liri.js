@@ -37,12 +37,26 @@ if (arg === 'my-tweets') {
 
 // Spotify
 var q = '';
+for (var i = 2; i < process.argv.length; i++) {
+  q = q + " " + process.argv[i];
+};
+// if statement for 
+if (arg === 'spotify-this-song' && q !== null) {
+} else {
+  q = 'I Want it That Way';
+};
 
+var songs = function() {spotify.search({type: 'track', query: q, limit: 1}, function(err, data)
+  {if(err){
+    console.log("this error is " + err)
+    };
+  console.log(data.tracks.items[0].album.artists[0].name); 
+  console.log(data.tracks.items[0].name);
+  console.log(data.tracks.items[0].album.name);
+  console.log(data.tracks.items[0].external_urls.spotify);
+  })
+};
 
-function songs = {
-	spotify.search({
-		type: 'track',
-		query: q,
-	})
-}
+songs();
+
 
