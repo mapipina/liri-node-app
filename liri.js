@@ -37,28 +37,28 @@ if (arg === 'my-tweets') {
 };
 
 // Spotify
-var q = '';
-for (var i = 2; i < process.argv.length; i++) {
-  q = q + " " + process.argv[i];
+var q = process.argv[3];
+if (q === undefined) {
+  q = 'I want it that way'
 };
-// if statement for 
-// if (arg === 'spotify-this-song' && q !== null) {
-//   songs();
-// } else {
-//   q = 'I Want it That Way';
-// };
+
 
 var songs = function() {spotify.search({type: 'track', query: q, limit: 1}, function(err, data)
-  {if(arg === 'spotify-this-song' && q !== null){
+  {if(q !== null){
     console.log(data.tracks.items[0].album.artists[0].name); 
     console.log(data.tracks.items[0].name);
     console.log(data.tracks.items[0].album.name);
     console.log(data.tracks.items[0].external_urls.spotify);
-    } else {
-      q = 'I Want it That Way';
-    };
+    }
   });
 };
+
+
+
+if (arg === 'spotify-this-song') {
+  songs();
+};
+
 
 // OMBD portion
 var movie = process.argv[3];
@@ -74,7 +74,6 @@ function movieRequest () {
     console.log("Year Released: " + JSON.parse(body).Released);
     console.log("imdbRating: " + JSON.parse(body).imdbRating);
     console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
-    // console.log("RT: " +JSON.parse(body).Ratings[1].Value);
     console.log("Country: " + JSON.parse(body).Country);
     console.log("Language: " + JSON.parse(body).Language);
     console.log("Plot: " + JSON.parse(body).Plot);
@@ -86,34 +85,6 @@ function movieRequest () {
 if (arg === 'movie-this') {
   movieRequest();
 }
-
-// lookUpMovie: (movie) => {
-//         var options = {
-//             uri: ‘http://www.omdbapi.com/',
-//             qs: {
-//                 apikey: keys.omdb.key, // -> uri + ‘?access_token=xxxxx%20xxxxx’
-//                 t: movie
-//             },
-//             headers: {
-//                 ‘User-Agent’: ‘Request-Promise’
-//             },
-//             json: true // Automatically parses the JSON string in the response
-//         };
-//         rp(options)
-//         .then((body) => {
-//           console.log(`# Title: ${body.Title}`);
-//           console.log(`# Year: ${body.Released}`);
-//           console.log(`# IMDB Rating: ${body.Ratings[0].Value}`);
-//           console.log(`# Rotten Tomatoes Rating: ${body.Ratings[1].Value}`);
-//           console.log(`# Country: ${body.Country}`);
-//           console.log(`# Language: ${body.Language}`);
-//           console.log(`# Plot: ${body.Plot}`);
-//           console.log(`# Cast: ${body.Actors}`);
-//         })
-//         .catch(error => {
-//             console.log("error:", error); 
-//         });
-//     };
 
 // Do what it says portion
 function doit () {
