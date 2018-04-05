@@ -53,7 +53,7 @@ var songs = function() {spotify.search({type: 'track', query: q, limit: 1}, func
     console.log(data.tracks.items[0].album.artists[0].name); 
     console.log(data.tracks.items[0].name);
     console.log(data.tracks.items[0].album.name);
-    console.log(data.tracks.items[0].external_urls.spotify);c
+    console.log(data.tracks.items[0].external_urls.spotify);
     } else {
       q = 'I Want it That Way';
     };
@@ -61,29 +61,30 @@ var songs = function() {spotify.search({type: 'track', query: q, limit: 1}, func
 };
 
 // OMBD portion
-var movie ='';
-for (var i = 2; i < process.argv.length; i++) {
-  movie = movie + " " + process.argv[i];
-};
+var movie = process.argv[3];
 
-request("http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy", function(error, response, body) {
+
+function movieRequest () {
+  request("http://www.omdbapi.com/?apikey=trilogy&t=" + movie, function(error, response, body) {
 
   // If there were no errors and the response code was 200 (i.e. the request was successful)...
-  if (!error && response.statusCode === 200) {
+  if (!error) {
     // Then we print out the imdbRating
     console.log("Title: " + JSON.parse(body).Title);
     console.log("Year Released: " + JSON.parse(body).Released);
     console.log("imdbRating: " + JSON.parse(body).imdbRating);
-    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).imdbRating);
-    console.log("Country: " + JSON.parse(body).imdbRating);
-    console.log("Language: " + JSON.parse(body).imdbRating);
-    console.log("Plot: " + JSON.parse(body).imdbRating);
-    console.log("Cast: " + JSON.parse(body).imdbRating);
+    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+    // console.log("RT: " +JSON.parse(body).Ratings[1].Value);
+    console.log("Country: " + JSON.parse(body).Country);
+    console.log("Language: " + JSON.parse(body).Language);
+    console.log("Plot: " + JSON.parse(body).Plot);
+    console.log("Cast: " + JSON.parse(body).Actors);
   }
 });
+}
 
 if (arg === 'movie-this') {
-
+  movieRequest();
 }
 
 // lookUpMovie: (movie) => {
