@@ -54,7 +54,6 @@ var songs = function() {spotify.search({type: 'track', query: q, limit: 1}, func
 };
 
 
-
 if (arg === 'spotify-this-song') {
   songs();
 };
@@ -90,10 +89,11 @@ if (arg === 'movie-this') {
 function doit () {
   fs.readFile("./random.txt", "utf8", (err, data) => {
   if (err) throw err;
-  // console.log(data);
   const lines = data.split(',')
   for (var i = 0; i < lines.length; i++) {
-      console.log(lines[i])
+      arg = lines[0];
+      q = lines[1];
+      songs();
   };
 });
 }
