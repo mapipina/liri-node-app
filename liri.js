@@ -5,7 +5,6 @@ const request = require('request');
 const Spotify = require('node-spotify-api');
 const Twitter = require('twitter');
 const fs = require('file-system');
-
 //Storing access tokens and keys in constants
 const spotify = new Spotify(keys.spotify);
 const client = new Twitter(keys.twitter);
@@ -57,7 +56,6 @@ var songs = function() {spotify.search({type: 'track', query: q, limit: 1}, func
 if (arg === 'spotify-this-song') {
   songs();
 };
-
 
 // OMBD portion
 var movie = process.argv[3];
